@@ -1,6 +1,4 @@
-FROM alpine:latest  
-
-RUN apk add --no-cache postgresql-client
+FROM ahmettoguz/postgresql-client
 
 WORKDIR /ahmet
 
