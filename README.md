@@ -1,0 +1,1 @@
+# core-database-initializer-alpine-postgresql-client
