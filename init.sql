@@ -184,9 +184,9 @@ ALTER SEQUENCE public.card_id_seq OWNED BY public.card.id;
 
 CREATE TABLE public.transaction (
     id integer NOT NULL,
-    sender_account_id integer NOT NULL,
-    receiver_account_id integer NOT NULL,
-    sender_card_id integer NOT NULL,
+    sender_account_id integer,
+    receiver_account_id integer,
+    sender_card_id integer,
     amount numeric(15,2) NOT NULL,
     transaction_date timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
     description character varying(255)
@@ -401,7 +401,7 @@ ALTER TABLE ONLY public.card
 --
 
 ALTER TABLE ONLY public.card
-    ADD CONSTRAINT card_account_id_fkey FOREIGN KEY (account_id) REFERENCES public.account(id) NOT VALID;
+    ADD CONSTRAINT card_account_id_fkey FOREIGN KEY (account_id) REFERENCES public.account(id) ON DELETE CASCADE NOT VALID;
 
 
 --
@@ -410,7 +410,7 @@ ALTER TABLE ONLY public.card
 --
 
 ALTER TABLE ONLY public.transaction
-    ADD CONSTRAINT transaction_receiver_account_id_fkey FOREIGN KEY (receiver_account_id) REFERENCES public.account(id) NOT VALID;
+    ADD CONSTRAINT transaction_receiver_account_id_fkey FOREIGN KEY (receiver_account_id) REFERENCES public.account(id) ON DELETE SET NULL NOT VALID;
 
 
 --
@@ -419,7 +419,7 @@ ALTER TABLE ONLY public.transaction
 --
 
 ALTER TABLE ONLY public.transaction
-    ADD CONSTRAINT transaction_sender_account_id_fkey FOREIGN KEY (sender_account_id) REFERENCES public.account(id) NOT VALID;
+    ADD CONSTRAINT transaction_sender_account_id_fkey FOREIGN KEY (sender_account_id) REFERENCES public.account(id) ON DELETE SET NULL NOT VALID;
 
 
 --
@@ -428,7 +428,7 @@ ALTER TABLE ONLY public.transaction
 --
 
 ALTER TABLE ONLY public.transaction
-    ADD CONSTRAINT transaction_sender_card_id_fkey FOREIGN KEY (sender_card_id) REFERENCES public.card(id) NOT VALID;
+    ADD CONSTRAINT transaction_sender_card_id_fkey FOREIGN KEY (sender_card_id) REFERENCES public.card(id) ON DELETE SET NULL NOT VALID;
 
 
 -- Completed on 2024-12-19 10:12:11 UTC
