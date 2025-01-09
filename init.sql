@@ -70,7 +70,10 @@ CREATE TABLE public.code (
     id integer NOT NULL,
     code character varying(10) NOT NULL,
     game_id integer,
-    player_id integer
+    player_id integer,
+    is_active boolean,
+    created_at timestamp without time zone DEFAULT now(),
+    updated_at timestamp without time zone
 );
 
 
@@ -108,7 +111,10 @@ ALTER SEQUENCE public.code_id OWNED BY public.code.id;
 
 CREATE TABLE public.game (
     id integer NOT NULL,
-    name character varying(100) NOT NULL
+    name character varying(100) NOT NULL,
+    is_deleted boolean,
+    created_at timestamp without time zone DEFAULT now(),
+    updated_at timestamp without time zone
 );
 
 
@@ -187,7 +193,10 @@ ALTER SEQUENCE public.game_id_seq OWNED BY public.game.id;
 CREATE TABLE public.player (
     id integer NOT NULL,
     nick_name character varying(25) NOT NULL,
-    password character varying(100) NOT NULL
+    password character varying(100) NOT NULL,
+    is_deleted boolean,
+    created_at timestamp without time zone DEFAULT now(),
+    updated_at timestamp without time zone
 );
 
 
@@ -303,17 +312,17 @@ ALTER TABLE ONLY public.player_game ALTER COLUMN id SET DEFAULT nextval('public.
 -- Data for Name: code; Type: TABLE DATA; Schema: public; Owner: admin
 --
 
-COPY public.code (id, code, game_id, player_id) FROM stdin;
-1	ABC123	1	1
-2	DEF456	1	1
-3	GHI789	1	1
-4	JKL012	1	1
-5	MNO345	2	1
-6	PQR678	2	1
-7	STU901	2	1
-8	VWX234	4	2
-9	YZA567	4	2
-10	BCD890	4	2
+COPY public.code (id, code, game_id, player_id, is_active, created_at, updated_at) FROM stdin;
+1	ABC123	1	1	t	2025-01-09 13:50:24.000000	\N
+2	DEF456	1	1	t	2025-01-09 13:50:24.000000	\N
+3	GHI789	1	1	t	2025-01-09 13:50:24.000000	\N
+4	JKL012	1	1	t	2025-01-09 13:50:24.000000	\N
+5	MNO345	2	1	t	2025-01-09 13:50:24.000000	\N
+6	PQR678	2	1	t	2025-01-09 13:50:24.000000	\N
+7	STU901	2	1	t	2025-01-09 13:50:24.000000	\N
+8	VWX234	4	2	t	2025-01-09 13:50:24.000000	\N
+9	YZA567	4	2	t	2025-01-09 13:50:24.000000	\N
+10	BCD890	4	2	t	2025-01-09 13:50:24.000000	\N
 \.
 
 
@@ -323,17 +332,17 @@ COPY public.code (id, code, game_id, player_id) FROM stdin;
 -- Data for Name: game; Type: TABLE DATA; Schema: public; Owner: admin
 --
 
-COPY public.game (id, name) FROM stdin;
-1	Genshin Impact
-2	League of Legends
-3	Fortnite
-4	Alex Legends
-5	Minecraft
-6	Call of Duty: Warzone
-7	Valorant
-8	Cyberpunk 2077
-9	FIFA 21
-10	The Witcher 3
+COPY public.game (id, name, is_deleted, created_at, updated_at) FROM stdin;
+1	Genshin Impact	f	2025-01-09 13:50:24.000000	\N
+2	League of Legends	f	2025-01-09 13:50:24.000000	\N
+3	Fortnite	f	2025-01-09 13:50:24.000000	\N
+4	Alex Legends	f	2025-01-09 13:50:24.000000	\N
+5	Minecraft	f	2025-01-09 13:50:24.000000	\N
+6	Call of Duty: Warzone	f	2025-01-09 13:50:24.000000	\N
+7	Valorant	f	2025-01-09 13:50:24.000000	\N
+8	Cyberpunk 2077	f	2025-01-09 13:50:24.000000	\N
+9	FIFA 21	f	2025-01-09 13:50:24.000000	\N
+10	The Witcher 3	f	2025-01-09 13:50:24.000000	\N
 \.
 
 
@@ -363,17 +372,17 @@ COPY public.game_detail (id, game_id, description, genre) FROM stdin;
 -- Data for Name: player; Type: TABLE DATA; Schema: public; Owner: admin
 --
 
-COPY public.player (id, nick_name, password) FROM stdin;
-1	starlight	secret
-2	blizzard	secret
-3	phantom	secret
-4	viper	secret
-5	neon	secret
-6	maverick	secret
-7	zenith	secret
-8	tornado	secret
-9	raven	secret
-10	spectrum	secret
+COPY public.player (id, nick_name, password, is_deleted, created_at, updated_at) FROM stdin;
+1	starlight	secret	f	2025-01-09 13:50:24.000000	\N
+2	blizzard	secret	f	2025-01-09 13:50:24.000000	\N
+3	phantom	secret	f	2025-01-09 13:50:24.000000	\N
+4	viper	secret	f	2025-01-09 13:50:24.000000	\N
+5	neon	secret	f	2025-01-09 13:50:24.000000	\N
+6	maverick	secret	f	2025-01-09 13:50:24.000000	\N
+7	zenith	secret	f	2025-01-09 13:50:24.000000	\N
+8	tornado	secret	f	2025-01-09 13:50:24.000000	\N
+9	raven	secret	f	2025-01-09 13:50:24.000000	\N
+10	spectrum	secret	f	2025-01-09 13:50:24.000000	\N
 \.
 
 
