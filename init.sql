@@ -1,49 +1,11 @@
 --
--- CLOSE CONNECTIONS
---
-
-DO $$
-BEGIN
-    PERFORM pg_terminate_backend(pg_stat_activity.pid)
-    FROM pg_stat_activity
-    WHERE pg_stat_activity.datname = 'code_stream' AND pid <> pg_backend_pid();
-END;
-$$;
-
-
---
 -- PostgreSQL database dump
 --
 
 -- Dumped from database version 17.2 (Debian 17.2-1.pgdg120+1)
 -- Dumped by pg_dump version 17.2
 
--- Started on 2025-01-09 16:44:02 UTC
-
-SET statement_timeout = 0;
-SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
-SET transaction_timeout = 0;
-SET client_encoding = 'UTF8';
-SET standard_conforming_strings = on;
-SELECT pg_catalog.set_config('search_path', '', false);
-SET check_function_bodies = false;
-SET xmloption = content;
-SET client_min_messages = warning;
-SET row_security = off;
-
-DROP DATABASE IF EXISTS code_stream;
---
--- TOC entry 3419 (class 1262 OID 16388)
--- Name: code_stream; Type: DATABASE; Schema: -; Owner: admin
---
-
-CREATE DATABASE code_stream WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE_PROVIDER = libc LOCALE = 'en_US.utf8';
-
-
-ALTER DATABASE code_stream OWNER TO admin;
-
-\connect code_stream
+-- Started on 2025-01-09 17:13:57 UTC
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -62,7 +24,7 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- TOC entry 217 (class 1259 OID 16389)
+-- TOC entry 217 (class 1259 OID 16461)
 -- Name: code; Type: TABLE; Schema: public; Owner: admin
 --
 
@@ -80,7 +42,7 @@ CREATE TABLE public.code (
 ALTER TABLE public.code OWNER TO admin;
 
 --
--- TOC entry 218 (class 1259 OID 16393)
+-- TOC entry 218 (class 1259 OID 16465)
 -- Name: code_id; Type: SEQUENCE; Schema: public; Owner: admin
 --
 
@@ -105,7 +67,7 @@ ALTER SEQUENCE public.code_id OWNED BY public.code.id;
 
 
 --
--- TOC entry 219 (class 1259 OID 16394)
+-- TOC entry 219 (class 1259 OID 16466)
 -- Name: game; Type: TABLE; Schema: public; Owner: admin
 --
 
@@ -121,7 +83,7 @@ CREATE TABLE public.game (
 ALTER TABLE public.game OWNER TO admin;
 
 --
--- TOC entry 220 (class 1259 OID 16398)
+-- TOC entry 220 (class 1259 OID 16470)
 -- Name: game_detail; Type: TABLE; Schema: public; Owner: admin
 --
 
@@ -139,7 +101,7 @@ CREATE TABLE public.game_detail (
 ALTER TABLE public.game_detail OWNER TO admin;
 
 --
--- TOC entry 221 (class 1259 OID 16403)
+-- TOC entry 221 (class 1259 OID 16476)
 -- Name: game_detail_id; Type: SEQUENCE; Schema: public; Owner: admin
 --
 
@@ -164,7 +126,7 @@ ALTER SEQUENCE public.game_detail_id OWNED BY public.game_detail.id;
 
 
 --
--- TOC entry 222 (class 1259 OID 16404)
+-- TOC entry 222 (class 1259 OID 16477)
 -- Name: game_id_seq; Type: SEQUENCE; Schema: public; Owner: admin
 --
 
@@ -189,7 +151,7 @@ ALTER SEQUENCE public.game_id_seq OWNED BY public.game.id;
 
 
 --
--- TOC entry 223 (class 1259 OID 16405)
+-- TOC entry 223 (class 1259 OID 16478)
 -- Name: player; Type: TABLE; Schema: public; Owner: admin
 --
 
@@ -206,7 +168,7 @@ CREATE TABLE public.player (
 ALTER TABLE public.player OWNER TO admin;
 
 --
--- TOC entry 224 (class 1259 OID 16409)
+-- TOC entry 224 (class 1259 OID 16482)
 -- Name: player_game; Type: TABLE; Schema: public; Owner: admin
 --
 
@@ -220,7 +182,7 @@ CREATE TABLE public.player_game (
 ALTER TABLE public.player_game OWNER TO admin;
 
 --
--- TOC entry 225 (class 1259 OID 16412)
+-- TOC entry 225 (class 1259 OID 16485)
 -- Name: player_game_id; Type: SEQUENCE; Schema: public; Owner: admin
 --
 
@@ -245,7 +207,7 @@ ALTER SEQUENCE public.player_game_id OWNED BY public.player_game.id;
 
 
 --
--- TOC entry 226 (class 1259 OID 16413)
+-- TOC entry 226 (class 1259 OID 16486)
 -- Name: player_id_seq; Type: SEQUENCE; Schema: public; Owner: admin
 --
 
@@ -270,7 +232,7 @@ ALTER SEQUENCE public.player_id_seq OWNED BY public.player.id;
 
 
 --
--- TOC entry 3230 (class 2604 OID 16414)
+-- TOC entry 3230 (class 2604 OID 16487)
 -- Name: code id; Type: DEFAULT; Schema: public; Owner: admin
 --
 
@@ -278,7 +240,7 @@ ALTER TABLE ONLY public.code ALTER COLUMN id SET DEFAULT nextval('public.code_id
 
 
 --
--- TOC entry 3232 (class 2604 OID 16415)
+-- TOC entry 3232 (class 2604 OID 16488)
 -- Name: game id; Type: DEFAULT; Schema: public; Owner: admin
 --
 
@@ -286,7 +248,7 @@ ALTER TABLE ONLY public.game ALTER COLUMN id SET DEFAULT nextval('public.game_id
 
 
 --
--- TOC entry 3234 (class 2604 OID 16416)
+-- TOC entry 3234 (class 2604 OID 16489)
 -- Name: game_detail id; Type: DEFAULT; Schema: public; Owner: admin
 --
 
@@ -294,7 +256,7 @@ ALTER TABLE ONLY public.game_detail ALTER COLUMN id SET DEFAULT nextval('public.
 
 
 --
--- TOC entry 3235 (class 2604 OID 16417)
+-- TOC entry 3236 (class 2604 OID 16490)
 -- Name: player id; Type: DEFAULT; Schema: public; Owner: admin
 --
 
@@ -302,7 +264,7 @@ ALTER TABLE ONLY public.player ALTER COLUMN id SET DEFAULT nextval('public.playe
 
 
 --
--- TOC entry 3237 (class 2604 OID 16418)
+-- TOC entry 3238 (class 2604 OID 16491)
 -- Name: player_game id; Type: DEFAULT; Schema: public; Owner: admin
 --
 
@@ -310,7 +272,7 @@ ALTER TABLE ONLY public.player_game ALTER COLUMN id SET DEFAULT nextval('public.
 
 
 --
--- TOC entry 3404 (class 0 OID 16389)
+-- TOC entry 3405 (class 0 OID 16461)
 -- Dependencies: 217
 -- Data for Name: code; Type: TABLE DATA; Schema: public; Owner: admin
 --
@@ -330,7 +292,7 @@ COPY public.code (id, code, game_id, player_id, is_active, created_at, updated_a
 
 
 --
--- TOC entry 3406 (class 0 OID 16394)
+-- TOC entry 3407 (class 0 OID 16466)
 -- Dependencies: 219
 -- Data for Name: game; Type: TABLE DATA; Schema: public; Owner: admin
 --
@@ -349,7 +311,7 @@ COPY public.game (id, name, is_deleted, created_at, updated_at) FROM stdin;
 \.
 
 --
--- TOC entry 3407 (class 0 OID 16398)
+-- TOC entry 3408 (class 0 OID 16470)
 -- Dependencies: 220
 -- Data for Name: game_detail; Type: TABLE DATA; Schema: public; Owner: admin
 --
@@ -369,7 +331,7 @@ COPY public.game_detail (id, game_id, description, genre, is_deleted, created_at
 
 
 --
--- TOC entry 3410 (class 0 OID 16405)
+-- TOC entry 3411 (class 0 OID 16478)
 -- Dependencies: 223
 -- Data for Name: player; Type: TABLE DATA; Schema: public; Owner: admin
 --
@@ -389,7 +351,7 @@ COPY public.player (id, nick_name, password, is_deleted, created_at, updated_at)
 
 
 --
--- TOC entry 3411 (class 0 OID 16409)
+-- TOC entry 3412 (class 0 OID 16482)
 -- Dependencies: 224
 -- Data for Name: player_game; Type: TABLE DATA; Schema: public; Owner: admin
 --
@@ -454,7 +416,7 @@ SELECT pg_catalog.setval('public.player_id_seq', 10, true);
 
 
 --
--- TOC entry 3239 (class 2606 OID 16420)
+-- TOC entry 3240 (class 2606 OID 16493)
 -- Name: code code_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -463,7 +425,7 @@ ALTER TABLE ONLY public.code
 
 
 --
--- TOC entry 3245 (class 2606 OID 16422)
+-- TOC entry 3246 (class 2606 OID 16495)
 -- Name: game_detail game_detail_game_id_key; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -472,7 +434,7 @@ ALTER TABLE ONLY public.game_detail
 
 
 --
--- TOC entry 3247 (class 2606 OID 16424)
+-- TOC entry 3248 (class 2606 OID 16497)
 -- Name: game_detail game_detail_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -481,7 +443,7 @@ ALTER TABLE ONLY public.game_detail
 
 
 --
--- TOC entry 3241 (class 2606 OID 16426)
+-- TOC entry 3242 (class 2606 OID 16499)
 -- Name: game game_name_key; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -490,7 +452,7 @@ ALTER TABLE ONLY public.game
 
 
 --
--- TOC entry 3243 (class 2606 OID 16428)
+-- TOC entry 3244 (class 2606 OID 16501)
 -- Name: game game_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -499,7 +461,7 @@ ALTER TABLE ONLY public.game
 
 
 --
--- TOC entry 3253 (class 2606 OID 16430)
+-- TOC entry 3254 (class 2606 OID 16503)
 -- Name: player_game player_game_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -508,7 +470,7 @@ ALTER TABLE ONLY public.player_game
 
 
 --
--- TOC entry 3249 (class 2606 OID 16432)
+-- TOC entry 3250 (class 2606 OID 16505)
 -- Name: player player_nick_name_key; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -517,7 +479,7 @@ ALTER TABLE ONLY public.player
 
 
 --
--- TOC entry 3251 (class 2606 OID 16434)
+-- TOC entry 3252 (class 2606 OID 16507)
 -- Name: player player_pkey; Type: CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -526,7 +488,7 @@ ALTER TABLE ONLY public.player
 
 
 --
--- TOC entry 3254 (class 2606 OID 16435)
+-- TOC entry 3255 (class 2606 OID 16508)
 -- Name: code code_game_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -535,7 +497,7 @@ ALTER TABLE ONLY public.code
 
 
 --
--- TOC entry 3255 (class 2606 OID 16440)
+-- TOC entry 3256 (class 2606 OID 16513)
 -- Name: code code_player_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -544,7 +506,7 @@ ALTER TABLE ONLY public.code
 
 
 --
--- TOC entry 3256 (class 2606 OID 16445)
+-- TOC entry 3257 (class 2606 OID 16518)
 -- Name: game_detail game_detail_game_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -553,7 +515,7 @@ ALTER TABLE ONLY public.game_detail
 
 
 --
--- TOC entry 3257 (class 2606 OID 16450)
+-- TOC entry 3258 (class 2606 OID 16523)
 -- Name: player_game player_game_game_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -562,7 +524,7 @@ ALTER TABLE ONLY public.player_game
 
 
 --
--- TOC entry 3258 (class 2606 OID 16455)
+-- TOC entry 3259 (class 2606 OID 16528)
 -- Name: player_game player_game_player_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: admin
 --
 
@@ -570,7 +532,7 @@ ALTER TABLE ONLY public.player_game
     ADD CONSTRAINT player_game_player_id_fkey FOREIGN KEY (player_id) REFERENCES public.player(id) ON DELETE SET NULL;
 
 
--- Completed on 2025-01-09 16:44:02 UTC
+-- Completed on 2025-01-09 17:13:57 UTC
 
 --
 -- PostgreSQL database dump complete
