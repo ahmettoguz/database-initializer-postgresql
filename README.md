@@ -47,6 +47,8 @@ The Core Database Initializer project provides a dockerized solution for initial
 
 <h2 id="releases">🚢 Releases</h2> 
 
+&nbsp; [![.](https://img.shields.io/badge/1.1.1-233838?style=flat&label=version&labelColor=470137&color=077521)](https://github.com/ahmettoguz/core-database-initializer-alpine-postgresql-client/tree/v1.1.1)
+
 &nbsp; [![.](https://img.shields.io/badge/1.1.0-233838?style=flat&label=version&labelColor=470137&color=077521)](https://github.com/ahmettoguz/core-database-initializer-alpine-postgresql-client/tree/v1.1.0)
 
 &nbsp; [![.](https://img.shields.io/badge/1.0.0-233838?style=flat&label=version&labelColor=470137&color=077521)](https://github.com/ahmettoguz/core-database-initializer-alpine-postgresql-client/tree/v1.0.0)
