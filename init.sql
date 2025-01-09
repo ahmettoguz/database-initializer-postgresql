@@ -129,7 +129,10 @@ CREATE TABLE public.game_detail (
     id integer NOT NULL,
     game_id integer,
     description character varying(500) NOT NULL,
-    genre character varying(25) NOT NULL
+    genre character varying(25) NOT NULL,
+    is_deleted boolean,
+    created_at timestamp without time zone DEFAULT now(),
+    updated_at timestamp without time zone
 );
 
 
@@ -345,24 +348,23 @@ COPY public.game (id, name, is_deleted, created_at, updated_at) FROM stdin;
 10	The Witcher 3	f	2025-01-09 13:50:24	\N
 \.
 
-
 --
 -- TOC entry 3407 (class 0 OID 16398)
 -- Dependencies: 220
 -- Data for Name: game_detail; Type: TABLE DATA; Schema: public; Owner: admin
 --
 
-COPY public.game_detail (id, game_id, description, genre) FROM stdin;
-1	1	An open-world action role-playing game developed by miHoYo.	Action, RPG
-2	2	Multiplayer online battle arena game developed by Riot Games.	MOBA
-3	3	Battle royale game developed by Epic Games.	Battle Royale
-4	4	Multiplayer first-person shooter game developed by Respawn Entertainment.	FPS
-5	5	Sandbox video game developed by Mojang Studios.	Sandbox
-6	6	Battle royale game developed by Infinity Ward.	Battle Royale
-7	7	Tactical shooter game developed by Riot Games.	Tactical Shooter
-8	8	Open-world role-playing game developed by CD Projekt.	RPG, Action
-9	9	Football simulation video game developed by EA Sports.	Sports
-10	10	Action role-playing game developed by CD Projekt Red.	RPG
+COPY public.game_detail (id, game_id, description, genre, is_deleted, created_at, updated_at) FROM stdin;
+1	1	An open-world action role-playing game developed by miHoYo.	Action, RPG	f	2025-01-09 13:50:24	\N
+2	2	Multiplayer online battle arena game developed by Riot Games.	MOBA	f	2025-01-09 13:50:24	\N
+3	3	Battle royale game developed by Epic Games.	Battle Royale	f	2025-01-09 13:50:24	\N
+4	4	Multiplayer first-person shooter game developed by Respawn Entertainment.	FPS	f	2025-01-09 13:50:24	\N
+5	5	Sandbox video game developed by Mojang Studios.	Sandbox	f	2025-01-09 13:50:24	\N
+6	6	Battle royale game developed by Infinity Ward.	Battle Royale	f	2025-01-09 13:50:24	\N
+7	7	Tactical shooter game developed by Riot Games.	Tactical Shooter	f	2025-01-09 13:50:24	\N
+8	8	Open-world role-playing game developed by CD Projekt.	RPG, Action	f	2025-01-09 13:50:24	\N
+9	9	Football simulation video game developed by EA Sports.	Sports	f	2025-01-09 13:50:24	\N
+10	10	Action role-playing game developed by CD Projekt Red.	RPG	f	2025-01-09 13:50:24	\N
 \.
 
 
