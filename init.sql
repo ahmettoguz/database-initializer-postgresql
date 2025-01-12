@@ -1,11 +1,40 @@
 --
--- PostgreSQL database dump
+-- CLOSE CONNECTIONS
 --
 
--- Dumped from database version 17.2 (Debian 17.2-1.pgdg120+1)
--- Dumped by pg_dump version 17.2
+DO $$
+BEGIN
+    PERFORM pg_terminate_backend(pg_stat_activity.pid)
+    FROM pg_stat_activity
+    WHERE pg_stat_activity.datname = 'code_stream' AND pid <> pg_backend_pid();
+END;
+$$;
 
--- Started on 2025-01-09 17:13:57 UTC
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET transaction_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+DROP DATABASE IF EXISTS code_stream;
+--
+-- TOC entry 3416 (class 1262 OID 18436)
+-- Name: code_stream; Type: DATABASE; Schema: -; Owner: admin
+--
+
+CREATE DATABASE code_stream WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE_PROVIDER = libc LOCALE = 'en_US.utf8';
+
+
+ALTER DATABASE code_stream OWNER TO admin;
+
+\connect code_stream
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -22,7 +51,6 @@ SET row_security = off;
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
-
 --
 -- TOC entry 217 (class 1259 OID 16461)
 -- Name: code; Type: TABLE; Schema: public; Owner: admin
@@ -33,9 +61,9 @@ CREATE TABLE public.code (
     code character varying(10) NOT NULL,
     game_id integer,
     player_id integer,
-    is_active boolean,
-    created_at timestamp without time zone DEFAULT now(),
-    updated_at timestamp without time zone
+    is_active boolean NOT NULL,
+    created_at timestamp without time zone DEFAULT now() NOT NULL,
+    updated_at timestamp without time zone NOT NULL
 );
 
 
@@ -74,9 +102,9 @@ ALTER SEQUENCE public.code_id OWNED BY public.code.id;
 CREATE TABLE public.game (
     id integer NOT NULL,
     name character varying(100) NOT NULL,
-    is_deleted boolean,
-    created_at timestamp without time zone DEFAULT now(),
-    updated_at timestamp without time zone
+    is_deleted boolean NOT NULL,
+    created_at timestamp without time zone DEFAULT now() NOT NULL,
+    updated_at timestamp without time zone NOT NULL
 );
 
 
@@ -92,9 +120,9 @@ CREATE TABLE public.game_detail (
     game_id integer,
     description character varying(500) NOT NULL,
     genre character varying(25) NOT NULL,
-    is_deleted boolean,
-    created_at timestamp without time zone DEFAULT now(),
-    updated_at timestamp without time zone
+    is_deleted boolean NOT NULL,
+    created_at timestamp without time zone DEFAULT now() NOT NULL,
+    updated_at timestamp without time zone NOT NULL
 );
 
 
@@ -159,9 +187,9 @@ CREATE TABLE public.player (
     id integer NOT NULL,
     nick_name character varying(25) NOT NULL,
     password character varying(100) NOT NULL,
-    is_deleted boolean,
-    created_at timestamp without time zone DEFAULT now(),
-    updated_at timestamp without time zone
+    is_deleted boolean NOT NULL,
+    created_at timestamp without time zone DEFAULT now() NOT NULL,
+    updated_at timestamp without time zone NOT NULL
 );
 
 
@@ -278,16 +306,16 @@ ALTER TABLE ONLY public.player_game ALTER COLUMN id SET DEFAULT nextval('public.
 --
 
 COPY public.code (id, code, game_id, player_id, is_active, created_at, updated_at) FROM stdin;
-1	ABC123	1	1	t	2025-01-09 13:50:24	\N
-2	DEF456	1	1	t	2025-01-09 13:50:24	\N
-3	GHI789	1	1	t	2025-01-09 13:50:24	\N
-4	JKL012	1	1	t	2025-01-09 13:50:24	\N
-5	MNO345	2	1	t	2025-01-09 13:50:24	\N
-6	PQR678	2	1	t	2025-01-09 13:50:24	\N
-7	STU901	2	1	t	2025-01-09 13:50:24	\N
-8	VWX234	4	2	t	2025-01-09 13:50:24	\N
-9	YZA567	4	2	t	2025-01-09 13:50:24	\N
-10	BCD890	4	2	t	2025-01-09 13:50:24	\N
+1	ABC123	1	1	t	2025-01-09 13:50:24	2025-01-09 13:50:24
+2	DEF456	1	1	t	2025-01-09 13:50:24	2025-01-09 13:50:24
+3	GHI789	1	1	t	2025-01-09 13:50:24	2025-01-09 13:50:24
+4	JKL012	1	1	t	2025-01-09 13:50:24	2025-01-09 13:50:24
+5	MNO345	2	1	t	2025-01-09 13:50:24	2025-01-09 13:50:24
+6	PQR678	2	1	t	2025-01-09 13:50:24	2025-01-09 13:50:24
+7	STU901	2	1	t	2025-01-09 13:50:24	2025-01-09 13:50:24
+8	VWX234	4	2	t	2025-01-09 13:50:24	2025-01-09 13:50:24
+9	YZA567	4	2	t	2025-01-09 13:50:24	2025-01-09 13:50:24
+10	BCD890	4	2	t	2025-01-09 13:50:24	2025-01-09 13:50:24
 \.
 
 
@@ -298,16 +326,16 @@ COPY public.code (id, code, game_id, player_id, is_active, created_at, updated_a
 --
 
 COPY public.game (id, name, is_deleted, created_at, updated_at) FROM stdin;
-1	Genshin Impact	f	2025-01-09 13:50:24	\N
-2	League of Legends	f	2025-01-09 13:50:24	\N
-3	Fortnite	f	2025-01-09 13:50:24	\N
-4	Alex Legends	f	2025-01-09 13:50:24	\N
-5	Minecraft	f	2025-01-09 13:50:24	\N
-6	Call of Duty: Warzone	f	2025-01-09 13:50:24	\N
-7	Valorant	f	2025-01-09 13:50:24	\N
-8	Cyberpunk 2077	f	2025-01-09 13:50:24	\N
-9	FIFA 21	f	2025-01-09 13:50:24	\N
-10	The Witcher 3	f	2025-01-09 13:50:24	\N
+1	Genshin Impact	f	2025-01-09 13:50:24	2025-01-09 13:50:24
+2	League of Legends	f	2025-01-09 13:50:24	2025-01-09 13:50:24
+3	Fortnite	f	2025-01-09 13:50:24	2025-01-09 13:50:24
+4	Alex Legends	f	2025-01-09 13:50:24	2025-01-09 13:50:24
+5	Minecraft	f	2025-01-09 13:50:24	2025-01-09 13:50:24
+6	Call of Duty: Warzone	f	2025-01-09 13:50:24	2025-01-09 13:50:24
+7	Valorant	f	2025-01-09 13:50:24	2025-01-09 13:50:24
+8	Cyberpunk 2077	f	2025-01-09 13:50:24	2025-01-09 13:50:24
+9	FIFA 21	f	2025-01-09 13:50:24	2025-01-09 13:50:24
+10	The Witcher 3	f	2025-01-09 13:50:24	2025-01-09 13:50:24
 \.
 
 --
@@ -317,16 +345,16 @@ COPY public.game (id, name, is_deleted, created_at, updated_at) FROM stdin;
 --
 
 COPY public.game_detail (id, game_id, description, genre, is_deleted, created_at, updated_at) FROM stdin;
-1	1	An open-world action role-playing game developed by miHoYo.	Action, RPG	f	2025-01-09 13:50:24	\N
-2	2	Multiplayer online battle arena game developed by Riot Games.	MOBA	f	2025-01-09 13:50:24	\N
-3	3	Battle royale game developed by Epic Games.	Battle Royale	f	2025-01-09 13:50:24	\N
-4	4	Multiplayer first-person shooter game developed by Respawn Entertainment.	FPS	f	2025-01-09 13:50:24	\N
-5	5	Sandbox video game developed by Mojang Studios.	Sandbox	f	2025-01-09 13:50:24	\N
-6	6	Battle royale game developed by Infinity Ward.	Battle Royale	f	2025-01-09 13:50:24	\N
-7	7	Tactical shooter game developed by Riot Games.	Tactical Shooter	f	2025-01-09 13:50:24	\N
-8	8	Open-world role-playing game developed by CD Projekt.	RPG, Action	f	2025-01-09 13:50:24	\N
-9	9	Football simulation video game developed by EA Sports.	Sports	f	2025-01-09 13:50:24	\N
-10	10	Action role-playing game developed by CD Projekt Red.	RPG	f	2025-01-09 13:50:24	\N
+1	1	An open-world action role-playing game developed by miHoYo.	Action, RPG	f	2025-01-09 13:50:24	2025-01-09 13:50:24
+2	2	Multiplayer online battle arena game developed by Riot Games.	MOBA	f	2025-01-09 13:50:24	2025-01-09 13:50:24
+3	3	Battle royale game developed by Epic Games.	Battle Royale	f	2025-01-09 13:50:24	2025-01-09 13:50:24
+4	4	Multiplayer first-person shooter game developed by Respawn Entertainment.	FPS	f	2025-01-09 13:50:24	2025-01-09 13:50:24
+5	5	Sandbox video game developed by Mojang Studios.	Sandbox	f	2025-01-09 13:50:24	2025-01-09 13:50:24
+6	6	Battle royale game developed by Infinity Ward.	Battle Royale	f	2025-01-09 13:50:24	2025-01-09 13:50:24
+7	7	Tactical shooter game developed by Riot Games.	Tactical Shooter	f	2025-01-09 13:50:24	2025-01-09 13:50:24
+8	8	Open-world role-playing game developed by CD Projekt.	RPG, Action	f	2025-01-09 13:50:24	2025-01-09 13:50:24
+9	9	Football simulation video game developed by EA Sports.	Sports	f	2025-01-09 13:50:24	2025-01-09 13:50:24
+10	10	Action role-playing game developed by CD Projekt Red.	RPG	f	2025-01-09 13:50:24	2025-01-09 13:50:24
 \.
 
 
@@ -337,16 +365,16 @@ COPY public.game_detail (id, game_id, description, genre, is_deleted, created_at
 --
 
 COPY public.player (id, nick_name, password, is_deleted, created_at, updated_at) FROM stdin;
-1	starlight	secret	f	2025-01-09 13:50:24	\N
-2	blizzard	secret	f	2025-01-09 13:50:24	\N
-3	phantom	secret	f	2025-01-09 13:50:24	\N
-4	viper	secret	f	2025-01-09 13:50:24	\N
-5	neon	secret	f	2025-01-09 13:50:24	\N
-6	maverick	secret	f	2025-01-09 13:50:24	\N
-7	zenith	secret	f	2025-01-09 13:50:24	\N
-8	tornado	secret	f	2025-01-09 13:50:24	\N
-9	raven	secret	f	2025-01-09 13:50:24	\N
-10	spectrum	secret	f	2025-01-09 13:50:24	\N
+1	starlight	secret	f	2025-01-09 13:50:24	2025-01-09 13:50:24
+2	blizzard	secret	f	2025-01-09 13:50:24	2025-01-09 13:50:24
+3	phantom	secret	f	2025-01-09 13:50:24	2025-01-09 13:50:24
+4	viper	secret	f	2025-01-09 13:50:24	2025-01-09 13:50:24
+5	neon	secret	f	2025-01-09 13:50:24	2025-01-09 13:50:24
+6	maverick	secret	f	2025-01-09 13:50:24	2025-01-09 13:50:24
+7	zenith	secret	f	2025-01-09 13:50:24	2025-01-09 13:50:24
+8	tornado	secret	f	2025-01-09 13:50:24	2025-01-09 13:50:24
+9	raven	secret	f	2025-01-09 13:50:24	2025-01-09 13:50:24
+10	spectrum	secret	f	2025-01-09 13:50:24	2025-01-09 13:50:24
 \.
 
 
