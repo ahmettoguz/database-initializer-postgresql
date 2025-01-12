@@ -62,7 +62,7 @@ CREATE TABLE public.code (
     game_id integer,
     player_id integer,
     is_active boolean NOT NULL,
-    created_at timestamp without time zone DEFAULT now() NOT NULL,
+    created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
 
@@ -103,7 +103,7 @@ CREATE TABLE public.game (
     id integer NOT NULL,
     name character varying(100) NOT NULL,
     is_deleted boolean NOT NULL,
-    created_at timestamp without time zone DEFAULT now() NOT NULL,
+    created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
 
@@ -121,7 +121,7 @@ CREATE TABLE public.game_detail (
     description character varying(500) NOT NULL,
     genre character varying(25) NOT NULL,
     is_deleted boolean NOT NULL,
-    created_at timestamp without time zone DEFAULT now() NOT NULL,
+    created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
 
@@ -188,7 +188,7 @@ CREATE TABLE public.player (
     nick_name character varying(25) NOT NULL,
     password character varying(100) NOT NULL,
     is_deleted boolean NOT NULL,
-    created_at timestamp without time zone DEFAULT now() NOT NULL,
+    created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
 
