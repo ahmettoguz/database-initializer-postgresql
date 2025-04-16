@@ -1,4 +1,4 @@
-<h1 id="top" align="center">Database Initializer <br/> Alpine PostgreSQL Client</h1>
+<h1 id="top" align="center">Database Initializer <br/> Alpine PostgreSQL Client <br/> 🚢 v2.0.0 🚢</h1>
 
 <br>
 
@@ -10,28 +10,8 @@
 
 ## 🔍 Table of Contents
 
-- [About Project](#intro)
-- [Technologies](#technologies)
 - [Features](#features)
-- [Releases](#releases)
 - [System Startup](#system-startup)
-- [Contributors](#contributors)
-
-<br/>
-
-<h2 id="intro">📌 About Project</h2>
-
-Database Initializer project provides a dockerized solution for initializing PostgreSQL databases with provided multiple schemas and seed data. It is particularly designed for development and testing processes, ensuring a consistent and reproducible database environment.
-
-<br/>
-
-<h2 id="technologies">☄️ Technologies</h2>
-
-&nbsp; [![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
-
-&nbsp; [![ALPINE-LINUX](https://img.shields.io/badge/Alpine_Linux-0D597F?style=for-the-badge&logo=alpine-linux&logoColor=white)](https://alpinelinux.org/)
-
-&nbsp; [![Postgresql](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 
 <br/>
 
@@ -45,18 +25,6 @@ Database Initializer project provides a dockerized solution for initializing Pos
 - **Lightweight Alpine Base:** Built using an Alpine Linux base for minimal image size and faster startup.
 - **Felxibility:** Easily modify the default schema and data by updating SQL scripts in the project.
 - **.env Configuration:** All environment variables are easily configurable using the `.env` file, simplifying configuration management.
-
-<br/>
-
-<h2 id="releases">🚢 Releases</h2>
-
-&nbsp; [![.](https://img.shields.io/badge/2.0.0-233838?style=flat&label=version&labelColor=111727&color=1181A1)](https://github.com/ahmettoguz/database-initializer-postgresql/tree/v2.0.0)
-
-&nbsp; [![.](https://img.shields.io/badge/1.1.1-233838?style=flat&label=version&labelColor=470137&color=077521)](https://github.com/ahmettoguz/core-database-initializer-alpine-postgresql-client/tree/v1.1.1)
-
-&nbsp; [![.](https://img.shields.io/badge/1.1.0-233838?style=flat&label=version&labelColor=470137&color=077521)](https://github.com/ahmettoguz/core-database-initializer-alpine-postgresql-client/tree/v1.1.0)
-
-&nbsp; [![.](https://img.shields.io/badge/1.0.0-233838?style=flat&label=version&labelColor=470137&color=077521)](https://github.com/ahmettoguz/core-database-initializer-alpine-postgresql-client/tree/v1.0.0)
 
 <br/>
 
@@ -122,9 +90,5 @@ docker logs -f                   database-initializer-postgresql-c
 ```
 
 <br/>
-
-<h2 id="contributors">👥 Contributors</h2>
-
-<a href="https://github.com/ahmettoguz" target="_blank"><img width=60 height=60 src="https://avatars.githubusercontent.com/u/101711642?v=4"></a>
 
 ### [🔝](#top)
