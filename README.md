@@ -1,4 +1,4 @@
-<h1 id="top" align="center">Core Database Initializer <br/> Alpine PostgreSQL Client</h1> 
+<h1 id="top" align="center">Database Initializer <br/> Alpine PostgreSQL Client</h1>
 
 <br>
 
@@ -16,13 +16,13 @@
 - [Releases](#releases)
 - [System Startup](#system-startup)
 - [Contributors](#contributors)
- 
+
 <br/>
 
 <h2 id="intro">📌 About Project</h2>
 
-The Core Database Initializer project provides a dockerized solution for initializing PostgreSQL databases with provided schemas and seed data. It is particularly designed for development and testing processes, ensuring a consistent and reproducible database environment.
-  
+Database Initializer project provides a dockerized solution for initializing PostgreSQL databases with provided multiple schemas and seed data. It is particularly designed for development and testing processes, ensuring a consistent and reproducible database environment.
+
 <br/>
 
 <h2 id="technologies">☄️ Technologies</h2>
@@ -37,15 +37,20 @@ The Core Database Initializer project provides a dockerized solution for initial
 
 <h2 id="features">🔥 Features</h2>
 
-+ **Database Initialization:** Automatically sets up the PostgreSQL database schema and loads seed data during container startup.
-+ **pgAdmin Backup:** Exports from pgAdmin are stored in the bind mount directory `/backup` for easy access and management.
-+ **Lightweight Alpine Base:** Built using an Alpine Linux base for minimal image size and faster startup.
-+ **Felxibility:** Easily modify the default schema and data by updating SQL scripts in the project.
-+ **Docker Containerization:** The application is containerized for consistent deployment and scaling.
+- **Docker Containerization:** The application is containerized using Docker to ensure consistent deployment, scalability, and isolation across different environments.
+- **Docker Compose Deployment:** Simplifies deployment with Docker Compose configuration, enabling easy setup and service orchestration without complex commands.
+- **Network Compatibility:** Uses shared Docker network to work with other services.
+- **Database Initialization:** Automatically sets up the PostgreSQL database schema and loads seed data during container startup.
+- **pgAdmin Backup:** Exports from pgAdmin are stored in the bind mount directory `/backup` for easy access and management.
+- **Lightweight Alpine Base:** Built using an Alpine Linux base for minimal image size and faster startup.
+- **Felxibility:** Easily modify the default schema and data by updating SQL scripts in the project.
+- **.env Configuration:** All environment variables are easily configurable using the `.env` file, simplifying configuration management.
 
 <br/>
 
-<h2 id="releases">🚢 Releases</h2> 
+<h2 id="releases">🚢 Releases</h2>
+
+&nbsp; [![.](https://img.shields.io/badge/2.0.0-233838?style=flat&label=version&labelColor=111727&color=1181A1)](https://github.com/ahmettoguz/database-initializer-postgresql/tree/v2.0.0)
 
 &nbsp; [![.](https://img.shields.io/badge/1.1.1-233838?style=flat&label=version&labelColor=470137&color=077521)](https://github.com/ahmettoguz/core-database-initializer-alpine-postgresql-client/tree/v1.1.1)
 
@@ -55,21 +60,44 @@ The Core Database Initializer project provides a dockerized solution for initial
 
 <br/>
 
-<h2 id="system-startup">🚀 System Startup</h2> 
+<h2 id="system-startup">🚀 System Startup</h2>
 
-* Create a new directory named `core`.
-* Clone the `core-docker-config` and `core-database-initializer-alpine-postgresql-client` repositories into the `core` directory.
-```
-git clone https://github.com/ahmettoguz/core-docker-config
-git clone https://github.com/ahmettoguz/core-database-initializer-alpine-postgresql-client
-```
-* Create `.env` file based on the `.env.example` file and configure it appropriately.
-* Export the SQL script using the pgAdmin interface. Check [`core-pgadmin`](https://github.com/ahmettoguz/core-pgadmin) repository.
-* Replace the `init.sql` file with your custom SQL script to initialize the database schema and seed data.
-* Include following code block to terminate all connections from database to be able to remove and re-initialize it.
+- Refer to [`PostgreSQL`](https://github.com/ahmettoguz/database-postgresql) repository to launch PostgreSQL database.
+
+- Refer to [`pgAdmin`](https://github.com/ahmettoguz/database-pgadmin) repository to launch pgAdmin to interact with database using GUI.
+
+- Create a new directory named `database`.
 
 ```
-DO $$ 
+mkdir database
+cd database
+```
+
+- Clone project.
+
+```
+git clone https://github.com/ahmettoguz/database-initializer-postgresql
+cd database-initializer-postgresql
+```
+
+- Create `.env` file based on the `.env.example` file with credentails.
+
+```
+cp .env.example .env
+```
+
+- Export the SQL script using the `pgAdmin` interface or provide an existing SQL script.
+
+- Create `sql` directory based on the `sql.example` directory.
+
+- Replace the `init.sql` file with your custom SQL script to initialize the database schema and seed data.
+
+- If there is more than one SQL script, place all scripts in the `sql` directory and update the `Dockerfile` by uncommenting the line with the correct file name.
+
+- Include following code block at the beginning of the SQL script to terminate all connections from database to be able to re-initialize it.
+
+```
+DO $$
 BEGIN
     PERFORM pg_terminate_backend(pg_stat_activity.pid)
     FROM pg_stat_activity
@@ -78,14 +106,25 @@ END;
 $$;
 ```
 
-* Refer to the documentation provided in the [`core-docker-config`](https://github.com/ahmettoguz/core-docker-config) project for the system startup commands.
+- Create `network-database` network if not exists.
+
+```
+docker network create network-database
+```
+
+- Run container.
+
+```
+docker stop                      database-initializer-postgresql-c
+docker rm                        database-initializer-postgresql-c
+docker compose -p database up -d database-initializer-postgresql
+docker logs -f                   database-initializer-postgresql-c
+```
 
 <br/>
 
-<h2 id="contributors">👥 Contributors</h2> 
+<h2 id="contributors">👥 Contributors</h2>
 
-<a href="https://github.com/ahmettoguz" target="_blank"><img width=60 height=60 src="https://avatars.githubusercontent.com/u/101711642?v=4"></a> 
+<a href="https://github.com/ahmettoguz" target="_blank"><img width=60 height=60 src="https://avatars.githubusercontent.com/u/101711642?v=4"></a>
 
 ### [🔝](#top)
-
-to be able to run sql need to close connection. so that add these block to beginning of the sql.
