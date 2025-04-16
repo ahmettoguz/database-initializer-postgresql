@@ -1,0 +1,16 @@
+####################################### Services
+services:
+  database-initializer-postgresql:
+    build: ./
+    image: database-initializer-postgresql-i
+    container_name: database-initializer-postgresql-c
+    env_file:
+      - ./.env
+    restart: ${RESTART_POLICY}
+    networks:
+      - network-database
+
+####################################### Networks
+networks:
+  network-database:
+    external: true
