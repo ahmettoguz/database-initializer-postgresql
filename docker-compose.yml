@@ -1,7 +1,7 @@
 ####################################### Services
 services:
   database-initializer-postgresql:
-    build: ./
+    build: .
     image: database-initializer-postgresql-i
     container_name: database-initializer-postgresql-c
     env_file:
