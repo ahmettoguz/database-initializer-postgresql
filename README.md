@@ -106,6 +106,12 @@ END;
 $$;
 ```
 
+- Clean sql file from comments with following regex
+
+```
+^--.*\n{1,}
+```
+
 - Create `network-database` network if not exists.
 
 ```
