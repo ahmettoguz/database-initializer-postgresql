@@ -1,4 +1,4 @@
-<h1 id="top" align="center">Database Initializer <br/> Alpine PostgreSQL Client <br/> 🚢 v2.0.0 🚢</h1>
+<h1 id="top" align="center">Database Initializer <br/> Alpine PostgreSQL Client <br/> 🚢 v2.0.1 🚢</h1>
 
 <br>
 
