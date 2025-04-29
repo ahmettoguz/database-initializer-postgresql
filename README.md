@@ -89,10 +89,10 @@ docker network create network-database
 - Run container.
 
 ```
-docker stop                      database-initializer-postgresql-c
-docker rm                        database-initializer-postgresql-c
-docker compose -p database up -d database-initializer-postgresql
-docker logs -f                   database-initializer-postgresql-c
+docker stop                              database-initializer-postgresql-c
+docker rm                                database-initializer-postgresql-c
+docker compose -p database up -d --build database-initializer-postgresql
+docker logs -f                           database-initializer-postgresql-c
 ```
 
 <br/>
