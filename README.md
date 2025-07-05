@@ -33,6 +33,8 @@ Database Initializer project provides a dockerized solution for initializing Pos
 
 &nbsp; [![Postgresql](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 
+&nbsp; [![.Env](https://img.shields.io/badge/.ENV-ECD53F.svg?style=for-the-badge&logo=dotenv&logoColor=black)](https://www.ibm.com/docs/bg/aix/7.2?topic=files-env-file)
+
 <br/>
 
 <h2 id="features">🔥 Features</h2>
@@ -49,6 +51,8 @@ Database Initializer project provides a dockerized solution for initializing Pos
 <br/>
 
 <h2 id="releases">🚢 Releases</h2>
+
+&nbsp; [![.](https://img.shields.io/badge/2.0.3-233838?style=flat&label=version&labelColor=111727&color=1181A1)](https://github.com/ahmettoguz/database-initializer-postgresql/tree/v2.0.3)
 
 &nbsp; [![.](https://img.shields.io/badge/2.0.2-233838?style=flat&label=version&labelColor=111727&color=1181A1)](https://github.com/ahmettoguz/database-initializer-postgresql/tree/v2.0.2)
 
@@ -84,15 +88,26 @@ git clone https://github.com/ahmettoguz/database-initializer-postgresql
 cd database-initializer-postgresql
 ```
 
-- Create `.env` file based on the `.env.example` file with credentails.
+- Switch version.
+
+```
+git checkout v2.0.3
+```
+
+- Create `.env` file based on the `.env.example` file and configure it appropriately.
 
 ```
 cp .env.example .env
+nano .env
 ```
 
 - Export the SQL script using the `pgAdmin` interface or provide an existing SQL script.
 
 - Create `sql` directory based on the `sql.example` directory.
+
+```
+cp -r sql.example sql
+```
 
 - Replace the `init.sql` file with your custom SQL script to initialize the database schema and seed data.
 
@@ -110,7 +125,7 @@ END;
 $$;
 ```
 
-- Clean sql file from comments with following regex
+- Clean sql file from comments with following regex.
 
 ```
 ^--.*\n{1,}
@@ -125,10 +140,11 @@ docker network create network-database
 - Run container.
 
 ```
-docker stop                              database-initializer-postgresql-c
-docker rm                                database-initializer-postgresql-c
-docker compose -p database up -d --build database-initializer-postgresql
-docker logs -f                           database-initializer-postgresql-c
+docker stop                              container-db-init-postgresql
+docker rm                                container-db-init-postgresql
+docker compose -p database up -d --build service-db-init-postgresql
+docker compose -p database up -d         service-db-init-postgresql
+docker logs -f                           container-db-init-postgresql
 ```
 
 <br/>
