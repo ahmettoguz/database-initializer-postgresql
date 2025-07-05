@@ -1,9 +1,9 @@
 ####################################### Services
 services:
-  database-initializer-postgresql:
+  service-db-init-postgresql:
     build: .
-    image: database-initializer-postgresql-i
-    container_name: database-initializer-postgresql-c
+    image: ahmetogguz/db-init-postgresql
+    container_name: container-db-init-postgresql
     env_file:
       - ./.env
     restart: ${RESTART_POLICY}
